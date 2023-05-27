@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro</title>
+  <link rel="stylesheet" href="C:/Users/pabiq/Documents/GitHub/Flask182/Estilos.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Registrar pacientes</h2>
+    <form>
+      <input type="text" placeholder="ID del paciente" required>
+      <input type="text" placeholder="Medico que lo atiende" required>
+      <input type="text" placeholder="Nombre" required>
+      <input type="text" placeholder="Apellido Materno" required>
+      <input type="text" placeholder="Apellido Paterno" required>
+      <label for="Fecha de nacimiento">Fecha de nacimiento</label>
+      <input type="date" placeholder="Fecha de nacimiento (dd/mm/yyyy)" required>
+      <br>
+      <input type="checkbox" id="optionalCheckbox">
+      <label for="optionalCheckbox">Datos opcionales</label>
+      <div class="optional-data">
+        <input type="text" placeholder="Enfermedades cronicas">
+        <input type="text" placeholder="Antecedentes familiares">
+      </div>
+      <input type="submit" value="Registrar">
+    </form>
+  </div>
+</body>
+</html>
