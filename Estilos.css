@@ -47,6 +47,7 @@ body {
   }
 
   .container input[type="submit"] {
+    margin: 10px;
     width: 100%;
     padding: 10px;
     background-color: #459990;
