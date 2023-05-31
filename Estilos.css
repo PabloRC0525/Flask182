@@ -65,6 +65,8 @@ body {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
+    overflow-y: scroll;
+    height: 200px;
   }
 
   .info-box h3 {
@@ -83,4 +85,33 @@ body {
   padding: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .selectable {
+    cursor: pointer;
+  }
+  
+  .selected {
+    background-color: yellow;
+  }
+  .sticky-row th,
+  .sticky-row td {
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 1;
   }
