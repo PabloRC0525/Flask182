@@ -108,10 +108,3 @@ body {
   .selected {
     background-color: yellow;
   }
-  .sticky-row th,
-  .sticky-row td {
-    position: sticky;
-    top: 0;
-    background-color: #f9f9f9;
-    z-index: 1;
-  }
