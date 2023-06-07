@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    background-image: url('C:/Users/pabiq/Documents/GitHub/Flask182/Examen1erP/Fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-align: center;
+    -webkit-text-fill-color: #F3FF00;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    -webkit-text-fill-color: #FFFFFF;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
