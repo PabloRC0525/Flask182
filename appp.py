@@ -38,9 +38,7 @@ def guardar():
     flash('Album Agregado Correctamente :)')
     return redirect(url_for('index'))
 
-@app.route('/eliminar')
-def eliminar():
-    return "Se eliminó el album en la BD"
+
 #Ejecucion de servidor
 if __name__ =='__main__':
     app.run(port=5000,debug=True)
