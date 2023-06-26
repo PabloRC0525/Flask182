@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administracion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Registrar pacientes</h2>
+    <form action="/regpaciente" method="POST">
+      <input type="text" name="txtMed" placeholder="Medico que lo atiende" required>
+      <input type="text" name="txtNom" placeholder="Nombre" required>
+      <input type="text" name="txtAP" placeholder="Apellido Paterno" required>
+      <input type="text" name="txtAM" placeholder="Apellido Materno" required>
+      <label for="Fecha de nacimiento">Fecha de nacimiento</label>
+      <input type="date" name="txtNac" placeholder="Fecha de nacimiento (dd/mm/yyyy)" required>
+      <br>
+      <input type="checkbox" id="optionalCheckbox">
+      <label for="optionalCheckbox">Datos opcionales</label>
+      <div class="optional-data">
+        <input type="text" name="txtEnf" placeholder="Enfermedades cronicas">
+        <input type="text" name="txtAlg" placeholder="Alergias">
+        <input type="text" name="txtAnt" placeholder="Antecedentes familiares">
+      </div>
+      <br>
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+</body>
+</html>

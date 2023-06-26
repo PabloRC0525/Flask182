@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Menú Principal</h2>
+
+        
+        <form action="{{ url_for('regpaciente') }}" method="GET">
+            <button type="submit">Registrar Paciente</button>
+        </form>
+    
+        <form action="{{ url_for('ced') }}" method="GET">
+            <button type="submit">Exploracion y Diagnostico</button>
+        </form>
+        
+        <form action="{{ url_for('citas') }}" method="GET">
+            <button type="submit">Citas</button>
+        </form>
+    
+</body>
+</html>

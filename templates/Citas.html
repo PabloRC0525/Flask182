@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administracion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Citas</h2>
+    <form action="/citas" method="POST">
+      <input type="text" placeholder="ID del paciente" required>
+      <label for="Fecha de cita">Fecha de cita</label>
+      <input type="date" placeholder="Fecha de cita (dd/mm/yyyy)" required>
+      <br>
+      <button type="submit">Consultar</button>
+    </form>
+  </div>
+</body>
+</html>
