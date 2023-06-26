@@ -29,7 +29,7 @@ def login():
     
     # Verificar las credenciales en la base de datos
     consulta = "SELECT RFC FROM admin WHERE RFC = %s AND contraseña = %s"
-    CS.execute(consulta, (VRFC, VPass, ))
+    CS.execute(consulta, (VRFC, VPass))
     resultado = CS.fetchone()
     Rol = "select Rol from admin where RFC = %s AND contraseña = %s"
     
@@ -104,6 +104,7 @@ def regpaciente():
 @app.route('/ced')
 def ced():
     return render_template('Citas_exp_Diagn.html')
+
 @app.route('/citas')
 def citas():
     return render_template('Citas.html')
