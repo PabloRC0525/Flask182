@@ -103,12 +103,11 @@ def regpaciente():
 
 @app.route('/ced')
 def ced():
-    # Código para procesar la página 'Admin'
     return render_template('Citas_exp_Diagn.html')
 @app.route('/citas')
 def citas():
-    # Código para procesar la página 'Admin'
     return render_template('Citas.html')
+
 #Ejecucion de servidor
 if __name__ =='__main__':
     app.run(port=5000,debug=True)
