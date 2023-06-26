@@ -10,28 +10,25 @@
   <div class="container">
     <h2>Citas, Exploracion y Dagnostico</h2>
     <form action="/ced" method="POST">
-      <input type="text" placeholder="ID del paciente" required>
+      <input type="text"  name="txtID" placeholder="ID del paciente" required>
       <label>Exploracion</label>
       <br>
       <label>Fecha </label>
-      <input type="date" placeholder="Fecha (dd/mm/yyyy)" required>
-      <input type="text" placeholder="Peso" required>
-      <input type="text" placeholder="Altura" required>
-      <input type="text" placeholder="Temperatura (°C)" required>
-      <input type="text" placeholder="LPM" required>
-      <input type="text" placeholder="Oxigeno" required>
+      <input type="date"  name="txtDat" placeholder="Fecha (dd/mm/yyyy)" required>
+      <input type="text"  name="txtPes" placeholder="Peso" required>
+      <input type="text"  name="txtAlt" placeholder="Altura" required>
+      <input type="text"  name="txtTem" placeholder="Temperatura (°C)" required>
+      <input type="text"  name="txtLPM" placeholder="LPM" required>
+      <input type="text"  name="txtOX" placeholder="Oxigeno" required>
+      <input type="text"  name="txtED" placeholder="Edad" required>
       <label> Diagnostico</label>
-      <input type="text" placeholder="Sintomas" required>
-      <input type="text" placeholder="Diagnostico" required>
-      <input type="text" placeholder="Tratamiento" required>
+      <input type="text"  name="txtSint" placeholder="Sintomas" required>
+      <input type="text" name="txtDig" placeholder="Diagnostico" required>
+      <input type="text"  name="txtTrat" placeholder="Tratamiento" required>
       <input type="checkbox" id="optionalCheckbox">
       <label for="optionalCheckbox">Solicitud de estudios</label>
-      <br>
-      <h2><label> Receta:</label></h2>
-      <div class="info-box">
-        <p>(RECETA MEDICA)</p>
-      </div>
-      <button type="submit"> Descargar </button>
+      
+      <button type="submit"> Guardar </button>
     </form>
   </div>
 </body>

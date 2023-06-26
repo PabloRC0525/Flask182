@@ -101,9 +101,28 @@ def regpaciente():
 
 
 
-@app.route('/ced')
+@app.route('/ced', methods=['GET','POST'])
 def ced():
-    return render_template('Citas_exp_Diagn.html')
+    if request.method == 'POST':
+        VMed = request.form['txtID']
+        VNom = request.form['txtDat']
+        VPes = request.form['txtPes']
+        VAP = request.form['txtAlt']
+        VAM = request.form['txtTem']
+        VNac = request.form['txtLPM']
+        VEnf = request.form['txtOX']
+        VED = request.form['txtED']
+        VAlr = request.form['txtSint']
+        VAnt = request.form['txtDig']
+        VTrat = request.form['txtTrat']
+        
+        CS = mysql.connection.cursor()
+        CS.execute('INSERT INTO exploracion_diagnostico (Id_paciente, Fecha, Peso, Altura, Temperatura, Latidos, Oxigeno, Edad, Sintomas, DX, Tratamiento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (VMed, VNom, VPes, VAP, VAM, VNac, VEnf, VED, VAlr, VAnt, VTrat))
+        mysql.connection.commit()
+        flash('Se ha registrado la consulta')
+        return redirect(url_for('ced'))
+    
+    return render_template('Citas_Exp_Diagn.html')
 
 @app.route('/citas')
 def citas():
