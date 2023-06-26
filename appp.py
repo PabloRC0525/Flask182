@@ -75,7 +75,7 @@ def admin():
         CS.execute('INSERT INTO admin (RFC, Nombre, Apellidopa, Apellidoma, Cedula, Correo, Rol, Contraseña) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (VRFC, VNom, VAP, VAM, VCed, VCorr, VRol, VPass))
         mysql.connection.commit()
         flash('Médico agregado correctamente')
-        return redirect(url_for('menuadmin'))
+        return redirect(url_for('admin'))
 
     return render_template('Admin.html')
 
@@ -88,14 +88,14 @@ def regpaciente():
         VAM = request.form['txtAM']
         VNac = request.form['txtNac']
         VEnf = request.form['txtEnf']
-        VAlr = request.form['txtAlr']
+        VAlr = request.form['txtAlg']
         VAnt = request.form['txtAnt']
         
         CS = mysql.connection.cursor()
-        CS.execute('INSERT INTO registro_paciente (Medico_id, Nombre, Apellidopa, Apellidoma, Fecha_Nacimiento, Enfermedades, Alergias, Antecedentes) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (VMed, VNom, VAP, VAM, VNac, VEnf, VAlr, VAnt))
+        CS.execute('INSERT INTO registro_paciente (Medico_id, Nombre, Apellidopa, Apellidoma, Fecha_Nacimiento, Enfermedades, Alergias, Antecedentes_familiares) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (VMed, VNom, VAP, VAM, VNac, VEnf, VAlr, VAnt))
         mysql.connection.commit()
         flash('Paciente registrado correctamente')
-        return redirect(url_for('menu'))
+        return redirect(url_for('regpaciente'))
     
     return render_template('RegPaciente.html')
 
