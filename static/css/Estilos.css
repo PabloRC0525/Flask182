@@ -35,6 +35,7 @@ body {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    color: black;
   }
 
   .container .optional-data {

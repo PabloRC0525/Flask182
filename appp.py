@@ -79,10 +79,10 @@ def admin():
 
     return render_template('Admin.html')
 
-@app.route('/regpaciente', methods=['GET','POST'])
+@app.route('/regpaciente', methods=['GET', 'POST'])
 def regpaciente():
     if request.method == 'POST':
-        VMed = request.form['txtMed']
+        VMed = request.form['txtMd']  # Actualiza el nombre del atributo a txtMd
         VNom = request.form['txtNom']
         VAP = request.form['txtAP']
         VAM = request.form['txtAM']
@@ -90,14 +90,20 @@ def regpaciente():
         VEnf = request.form['txtEnf']
         VAlr = request.form['txtAlg']
         VAnt = request.form['txtAnt']
-        
+
         CS = mysql.connection.cursor()
-        CS.execute('INSERT INTO registro_paciente (Medico_id, Nombre, Apellidopa, Apellidoma, Fecha_Nacimiento, Enfermedades, Alergias, Antecedentes_familiares) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (VMed, VNom, VAP, VAM, VNac, VEnf, VAlr, VAnt))
+        CS.execute(
+            'INSERT INTO registro_paciente (Medico_id, Nombre, Apellidopa, Apellidoma, Fecha_Nacimiento, Enfermedades, Alergias, Antecedentes_familiares) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+            (VMed, VNom, VAP, VAM, VNac, VEnf, VAlr, VAnt))
         mysql.connection.commit()
         flash('Paciente registrado correctamente')
         return redirect(url_for('regpaciente'))
-    
-    return render_template('RegPaciente.html')
+
+    CS = mysql.connection.cursor()
+    CS.execute('SELECT ID, concat(Nombre, " ", Apellidopa, " ",Apellidoma) as Nombrec FROM admin')
+    medicos = CS.fetchall()
+
+    return render_template('RegPaciente.html', medicos=medicos)
 
 
 

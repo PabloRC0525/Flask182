@@ -10,7 +10,12 @@
   <div class="container">
     <h2>Registrar pacientes</h2>
     <form action="/regpaciente" method="POST">
-      <input type="text" name="txtMed" placeholder="Medico que lo atiende" required>
+      <select name="txtMd" id="txtMed" required>
+        <option value="" disabled selected>Medico que lo atiende</option>
+        {% for medico in medicos %}
+          <option value="{{ medico.ID }}">{{ medico.Nombrec }}</option>
+        {% endfor %}
+      </select>
       <input type="text" name="txtNom" placeholder="Nombre" required>
       <input type="text" name="txtAP" placeholder="Apellido Paterno" required>
       <input type="text" name="txtAM" placeholder="Apellido Materno" required>
