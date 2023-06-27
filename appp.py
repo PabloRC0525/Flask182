@@ -85,7 +85,7 @@ def regpaciente():
         VMed = request.form['txtMed']  # Actualiza el nombre del atributo a txtMed
         # Obtén el ID del médico a partir de su nombre
         CS = mysql.connection.cursor()
-        CS.execute('SELECT ID FROM admin WHERE CONCAT(Nombre, " ", Apellidopa, " ", Apellidoma) = %s', (VMed,))
+        CS.execute('SELECT ID FROM admin WHERE CONCAT(Nombre, " ", Apellidopa, IF(Apellidoma != "", CONCAT(" ", Apellidoma), "")) = %s', (VMed,))
         medico = CS.fetchone()
         if medico:
             VMedID = medico[0]  # Accede al primer elemento de la tupla, que es el ID
@@ -118,7 +118,8 @@ def ced():
         VPac = request.form['txtPac']  # Actualiza el nombre del atributo a txtMed
         # Obtén el ID del médico a partir de su nombre
         CS = mysql.connection.cursor()
-        CS.execute('SELECT Id_paciente FROM registro_paciente WHERE CONCAT(Nombre, " ", Apellidopa, " ", Apellidoma) = %s', (VPac,))
+        CS.execute('SELECT Id_paciente FROM registro_paciente WHERE CONCAT(Nombre, " ", Apellidopa, IF(Apellidoma != "", CONCAT(" ", Apellidoma), "")) = %s', (VPac,))
+        paciente = CS.fetchone()
         paciente = CS.fetchone()
         if paciente:
             VPacID = paciente[0]
