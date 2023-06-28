@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultar Pacientes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Consultar Pacientes:</h2>
+    <input type="text" placeholder="Buscar por nombre" required>
+    <form action="{{ url_for('cons_pac') }}" method="POST">
+      <div class="info-box">
+        <table>
+            <tr></tr>
+              <th>Nombre</th>
+              <th>Modificar</th>
+              <th>Exploracion</th>
+            </tr>
+            <tr>
+              <td>Pablo Enrique Ramírez Carrillo</td>
+              <td>
+                <label class="selectable">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+              <td>
+                <label class="selectable">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Alan Yoltic Guzman Ayala</td>
+              <td>
+                <label class="selectable">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+              <td>
+                <label class="selectable">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Andres Morales Cortez </td>
+              <td>
+                <label class="selectable">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+              <td>
+                <label class="selectable">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+                <td>Checo Perez </td>
+                <td>
+                  <label class="selectable">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </td>
+                <td>
+                  <label class="selectable">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </td>
+              </tr>
+            
+          </table>
+      </div>
+      <input type="submit" value="Acceder">
+    </form>
+  </div>
+</body>
+</html>

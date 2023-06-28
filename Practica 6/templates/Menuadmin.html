@@ -14,6 +14,10 @@
             <button type="submit">Medicos</button>
         </form>
         
+        <form action="{{ url_for('cons_med') }}" method="GET">
+            <button type="submit">Consultar Medicos</button>
+        </form>
+
         <form action="{{ url_for('regpaciente') }}" method="GET">
             <button type="submit">Registrar Paciente</button>
         </form>
@@ -24,6 +28,10 @@
 
         <form action="{{ url_for('citas') }}" method="GET">
             <button type="submit">Citas</button>
+        </form>
+
+        <form action="{{ url_for('cons_pac') }}" method="GET">
+            <button type="submit">Consultar Pacientes</button>
         </form>
     
 </body>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultar Medicos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Consultar Medicos:</h2>
+    <input type="text" placeholder="Buscar por nombre" required>
+    <form action="{{ url_for('cons_med') }}" method="POST">
+      <div class="info-box">
+        <table>
+            <tr></tr>
+              <th>Nombre</th>
+
+            </tr>
+            <tr>
+              <td>Pablo Enrique Ramírez Carrillo</td>
+            </tr>
+            <tr>
+              <td>Alan Yoltic Guzman Ayala</td>
+            </tr>
+            <tr>
+              <td>Andres Morales Cortez </td>
+            </tr>
+            <tr>
+                <td>Checo Perez </td>
+              </tr>
+            
+          </table>
+      </div>
+      <input type="submit" value="Acceder">
+    </form>
+  </div>
+</body>
+</html>

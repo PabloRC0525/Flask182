@@ -146,6 +146,14 @@ def ced():
 def citas():
     return render_template('Citas.html')
 
+@app.route('/cons_med')
+def cons_med():
+    return render_template('MEDICOS.html')
+
+@app.route('/cons_pac')
+def cons_pac():
+    return render_template('PACIENTESS.html')
+
 #Ejecucion de servidor
 if __name__ =='__main__':
     app.run(port=5000,debug=True)
