@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subventanas en una misma ventana</title>
+    <style>
+        body {
+            background-color: #87CEEB; /* Color azul cielo */
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            color: #333333;
+        }
+        
+        #welcome {
+            background-color: #ffffff; /* Color blanco */
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        #options {
+            background-color: #ffffff; /* Color blanco */
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        #content {
+            background-color: #ffffff; /* Color blanco */
+            padding: 20px;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #333333; /* Color gris oscuro */
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #555555; /* Color gris más oscuro */
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName("section");
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = "none";
+            }
+            document.getElementById(sectionId).style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div id="welcome">
+        <h1>Bienvenido</h1>
+        <p>Selecciona una opción:</p>
+    </div>
+    
+    <div id="options">
+        <button onclick="showSection('guardar')">Guardar Usuario</button>
+        <button onclick="showSection('consultar')">Consultar Usuario</button>
+        <button onclick="showSection('actualizar')">Actualizar Usuario</button>
+        <button onclick="showSection('eliminar')">Eliminar Usuario</button>
+    </div>
+    
+    <div id="content">
+        <div id="guardar" class="section">
+            <h1>Guardar Usuario</h1>
+            <form>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required><br>
+                
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" required><br>
+                
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" required><br>
+                
+                <button type="button" onclick="guardarUsuario()">Guardar</button>
+            </form>
+        </div>
+        
+        <div id="consultar" class="section">
+            <h1>Consultar Usuario</h1>
+            <form>
+                <label for="id">ID de usuario:</label>
+                <input type="text" id="id" required><br>
+                
+                <button type="button" onclick="consultarUsuario()">Consultar</button>
+            </form>
+        </div>
+        
+        <div id="actualizar" class="section">
+            <h1>Actualizar Usuario</h1>
+            <form>
+                <label for="id">ID de usuario:</label>
+                <input type="text" id="id" required><br>
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required><br>
+                
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" required><br>
+                
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" required><br>
+                
+                <button type="button" onclick="actualizarUsuario()">Actualizar</button>
+            </form>
+        </div>
+        
+        <div id="eliminar" class="section">
+            <h1>Eliminar Usuario</h1>
+            <form>
+                <label for="id">ID de usuario:</label>
+                <input type="text" id="id" required><br>
+                
+                <button type="button" onclick="eliminarUsuario()">Eliminar</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function guardarUsuario() {
+            var nom = document.getElementById("nombre").value;
+            var cor = document.getElementById("correo").value;
+            var con = document.getElementById("contraseña").value;
+            
+            // Resto del código
+        }
+        
+        function consultarUsuario() {
+            var id = document.getElementById("id").value;
+            
+            // Resto del código
+        }
+        
+        function actualizarUsuario() {
+            var id = document.getElementById("id").value;
+            var nom = document.getElementById("nombre").value;
+            var cor = document.getElementById("correo").value;
+            var con = document.getElementById("contraseña").value;
+            
+            // Resto del código
+        }
+        
+        function eliminarUsuario() {
+            var id = document.getElementById("id").value;
+            
+            // Resto del código
+        }
+    </script>
+</body>
+</html>

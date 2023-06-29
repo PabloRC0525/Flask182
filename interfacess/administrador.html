@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Administradores</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+            background-color: skyblue;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .tab.active {
+            background-color: white;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .treeview {
+            max-height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .button {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var tabs = Array.from(document.getElementsByClassName("tab"));
+            var contents = Array.from(document.getElementsByClassName("content"));
+
+            function showTab(tabIndex) {
+                tabs.forEach(function (tab) {
+                    tab.classList.remove("active");
+                });
+                contents.forEach(function (content) {
+                    content.style.display = "none";
+                });
+
+                tabs[tabIndex].classList.add("active");
+                contents[tabIndex].style.display = "block";
+            }
+
+            tabs.forEach(function (tab, index) {
+                tab.addEventListener("click", function () {
+                    showTab(index);
+                });
+            });
+
+            showTab(0);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tab-container">
+            <div class="tab">Consultar Productos</div>
+            <div class="tab">Pedidos</div>
+            <div class="tab">Clientes</div>
+            <div class="tab">Agregar Productos</div>
+        </div>
+
+        <div class="content">
+            <div class="treeview">
+                <h3>Consultar Productos</h3>
+                <!-- Contenido del árbol de productos -->
+            </div>
+            <button class="button">Nuevo producto</button>
+        </div>
+
+        <div class="content">
+            <div class="treeview">
+                <h3>Consultar Pedidos</h3>
+                <!-- Contenido del árbol de pedidos -->
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="treeview">
+                <h3>Consultar Clientes</h3>
+                <!-- Contenido del árbol de clientes -->
+            </div>
+        </div>
+
+        <div class="content">
+            <h3>Agregar Productos</h3>
+            <label for="idUp">ID:</label>
+            <input type="text" id="idUp"><br>
+
+            <label for="nom">Nombre:</label>
+            <input type="text" id="nom"><br>
+
+            <label for="desc">Descripción:</label>
+            <input type="text" id="desc"><br>
+
+            <label for="precio">Precio:</label>
+            <input type="text" id="precio"><br>
+
+            <label for="cat">Categoría:</label>
+            <input type="text" id="cat"><br>
+
+            <button class="button">Agregar</button>
+        </div>
+    </div>
+</body>
+
+</html>

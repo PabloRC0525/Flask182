@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD de Usuarios</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #87CEEB;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #FFFFFF;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tab {
+            overflow: hidden;
+            background-color: #A0C4FF;
+        }
+        
+        .tab button {
+            background-color: #333333;
+            color: #FFFFFF;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .tab button:hover {
+            background-color: #555555;
+        }
+        
+        .tab button.active {
+            background-color: #E8E8E8;
+        }
+        
+        .section {
+            display: none;
+            padding: 20px;
+            border-bottom: 1px solid #A0C4FF;
+        }
+        
+        .section.active {
+            display: block;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName("section");
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove("active");
+            }
+            document.getElementById(sectionId).classList.add("active");
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tab">
+            <button onclick="showSection('iniciarSesion')" class="active">Iniciar Sesión</button>
+            <button onclick="showSection('crearCuenta')">Crear cuenta</button>
+        </div>
+
+        <div class="section active" id="iniciarSesion">
+            <h2>Bienvenido a KafeApp</h2>
+            <button onclick="showSection('iniciarSesionForm')">Iniciar Sesión</button>
+            <button onclick="showSection('registrarForm')">Registrarte</button>
+        </div>
+
+        <div class="section" id="iniciarSesionForm">
+            <h3>Iniciar Sesión</h3>
+            <label for="idLi">ID:</label>
+            <input type="text" id="idLi" required><br>
+
+            <label for="contraLi">Contraseña:</label>
+            <input type="password" id="contraLi" required><br>
+
+            <button type="button">Iniciar Sesión</button>
+            <button type="button" onclick="showSection('iniciarSesion')">Regresar</button>
+        </div>
+
+        <div class="section" id="registrarForm">
+            <h3>Registrarte</h3>
+            <label for="id">ID:</label>
+            <input type="text" id="id" required><br>
+
+            <label for="nom">Nombre:</label>
+            <input type="text" id="nom" required><br>
+
+            <label for="apPat">Apellido Paterno:</label>
+            <input type="text" id="apPat" required><br>
+
+            <label for="apMat">Apellido Materno:</label>
+            <input type="text" id="apMat" required><br>
+
+            <label for="contra">Contraseña:</label>
+            <input type="password" id="contra" required><br>
+
+            <button type="button">Registrarte</button>
+            <button type="button" onclick="showSection('iniciarSesion')">Regresar</button>
+        </div>
+
+        <div class="section" id="crearCuenta">
+            <h2>Crear Cuenta</h2>
+            <button onclick="showSection('crearCuentaForm')">Crear Cuenta</button>
+            <button onclick="showSection('iniciarSesion')">Iniciar Sesión</button>
+        </div>
+
+        <div class="section" id="crearCuentaForm">
+            <h3>Crear Cuenta</h3>
+            <label for="idCrear">ID:</label>
+            <input type="text" id="idCrear" required><br>
+
+            <label for="contraCrear">Contraseña:</label>
+            <input type="password" id="contraCrear" required><br>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" required><br>
+
+            <button type="button">Crear Cuenta</button>
+            <button type="button" onclick="showSection('crearCuenta')">Regresar</button>
+        </div>
+    </div>
+</body>
+
+</html>

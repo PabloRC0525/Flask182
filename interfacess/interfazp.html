@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        #header {
+            background-color: #E8E8E8; /* Color de fondo del encabezado */
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333333;
+            margin: 0;
+        }
+        
+        #container {
+            display: flex;
+        }
+        
+        #sidebar {
+            background-color: #A0C4FF; /* Color de fondo de la barra lateral */
+            width: 200px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        
+        .option {
+            margin-bottom: 10px;
+        }
+        
+        .option button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #ffffff;
+            transition: background-color 0.3s;
+            background-color: #333333;
+        }
+        
+        .option button:hover {
+            background-color: #555555; /* Color de fondo del botón al pasar el cursor */
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section h2 {
+            color: #333333;
+            margin-top: 0;
+        }
+        
+        .section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333333;
+        }
+        
+        .section input[type="text"],
+        .section input[type="email"],
+        .section input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .section button {
+            padding: 10px 20px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .section button:hover {
+            background-color: #555555; /* Color de fondo del botón al pasar el cursor */
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName("section");
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove("active");
+            }
+            document.getElementById(sectionId).classList.add("active");
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        <h1>Interfaz Dinámica</h1>
+    </div>
+    
+    <div id="container">
+        <div id="sidebar">
+            <div class="option">
+                <button onclick="showSection('guardar')">Guardar Usuario</button>
+            </div>
+            <div class="option">
+                <button onclick="showSection('consultar')">Consultar Usuario</button>
+            </div>
+            <div class="option">
+                <button onclick="showSection('actualizar')">Actualizar Usuario</button>
+            </div>
+            <div class="option">
+                <button onclick="showSection('eliminar')">Eliminar Usuario</button>
+            </div>
+        </div>
+        
+        <div id="content">
+            <div id="guardar" class="section active">
+                <h2>Guardar Usuario</h2>
+                <form>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required><br>
+                    
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" required><br>
+                    
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseña" required><br>
+                    
+                    <button type="button">Guardar</button>
+                </form>
+            </div>
+            
+            <div id="consultar" class="section">
+                <h2>Consultar Usuario</h2>
+                <form>
+                    <label for="id">ID de usuario:</label>
+                    <input type="text" id="id" required><br>
+                    
+                    <button type="button">Consultar</button>
+                </form>
+            </div>
+            
+            <div id="actualizar" class="section">
+                <h2>Actualizar Usuario</h2>
+                <form>
+                    <label for="id">ID de usuario:</label>
+                    <input type="text" id="id" required><br>
+                    
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required><br>
+                    
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" required><br>
+                    
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseña" required><br>
+                    
+                    <button type="button">Actualizar</button>
+                </form>
+            </div>
+            
+            <div id="eliminar" class="section">
+                <h2>Eliminar Usuario</h2>
+                <form>
+                    <label for="id">ID de usuario:</label>
+                    <input type="text" id="id" required><br>
+                    
+                    <button type="button">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
