@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frutería - Consulta</title>
+</head>
+<body>
+    <h1>Consulta de frutas</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Fruta</th>
+            <th>Temporada</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+        {% for registro in registros %}
+            <tr>
+                <td>{{ registro[0] }}</td>
+                <td>{{ registro[1] }}</td>
+                <td>{{ registro[2] }}</td>
+                <td>{{ registro[3] }}</td>
+                <td>{{ registro[4] }}</td>
+                <td>
+                    <a href="/editar/{{ registro[0] }}">Editar</a>
+                    <a href="/eliminar/{{ registro[0] }}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Volver al formulario</a>
+</body>
+</html>

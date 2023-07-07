@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frutería - Búsqueda</title>
+</head>
+<body>
+    <h1>Resultado de búsqueda</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Fruta</th>
+            <th>Temporada</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+        {% for resultado in resultados %}
+            <tr>
+                <td>{{ resultado[0] }}</td>
+                <td>{{ resultado[1] }}</td>
+                <td>{{ resultado[2] }}</td>
+                <td>{{ resultado[3] }}</td>
+                <td>{{ resultado[4] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Volver al formulario</a>
+</body>
+</html>

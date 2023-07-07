@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frutería - Edición</title>
+</head>
+<body>
+    <h1>Editar registro</h1>
+    <form action="/actualizar/{{ registro[0] }}" method="post">
+        <label for="fruta">Fruta:</label>
+        <input type="text" id="fruta" name="fruta" value="{{ registro[1] }}"><br><br>
+        
+        <label for="temporada">Temporada:</label>
+        <input type="text" id="temporada" name="temporada" value="{{ registro[2] }}"><br><br>
+        
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" value="{{ registro[3] }}"><br><br>
+        
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" value="{{ registro[4] }}"><br><br>
+        
+        <input type="submit" value="Actualizar">
+    </form>
+    <br>
+    <a href="/consulta">Volver a la consulta</a>
+</body>
+</html>
