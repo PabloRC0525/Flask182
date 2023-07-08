@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang ='es'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar</title>
+
+
+</head>
+<body>
+    {%with mensajes= get_flashed_messages()%}
+        {% if mensajes%}
+            {%for msj in mensajes%}
+                <h3> {{ msj }} </h3>
+            {%endfor%}
+        {% endif %}
+    {%endwith%}
+    <center> <h1>Buscar Frutas</h1> </center>
+
+    <br>
+    <form action="/buscar" method="POST">
+        <select name="txtFrut" required>
+          <option value="" disabled selected>Buscar fruta</option>
+          {% for fruta in list %}
+            <option value="{{ fruta.0 }}">{{ fruta.0 }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">Buscar</button>
+      </form>
+      
+      <table>
+        <thead>
+          <tr>
+            <td>ID:</td>
+            <td>Fruta:</td>
+            <td>Temporada:</td>
+            <td>Precio:</td>
+            <td>Stock:</td>
+          </tr>
+        </thead>
+        <tbody>
+            {% if list %}
+              {% for alb in list %}
+                <tr>
+                  <td>{{ alb.0 }}</td>
+                  <td>{{ alb.1 }}</td>
+                  <td>{{ alb.2 }}</td>
+                  <td>{{ alb.3 }}</td>
+                  <td>{{ alb.4 }}</td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="5">No se encontraron resultados</td>
+              </tr>
+            {% endif %}
+          </tbody>
+      </table>
+      
+
+</body>
+
+</html>

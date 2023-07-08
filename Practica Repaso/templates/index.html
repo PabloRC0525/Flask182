@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang ='es'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutería</title>
+
+
+</head>
+<body>
+    {%with mensajes= get_flashed_messages()%}
+        {% if mensajes%}
+            {%for msj in mensajes%}
+                <h3> {{ msj }} </h3>
+            {%endfor%}
+        {% endif %}
+    {%endwith%}
+    <center> <h1>Frutería la toronjita</h1> </center>
+    <br>
+    <br>
+    <form action="/guardar" method="POST">
+
+        <input type="text" name="txtFruta" placeholder="Ingrese la fruta">
+        <select name="txtTemporada" required>
+        <option value="" disabled selected>Temporada</option>
+          <option value="Primavera">Primavera</option>
+          <option value="Verano">Verano</option>
+          <option value="Otoño">Otoño</option>
+          <option value="Invierno">Invierno</option>
+      </select>
+        <input type="number" name="txtPrecio" placeholder="Precio" step="0.01">
+        <input type="number" name="txtStock" placeholder="Stock" >
+        
+        <button type="submit"> Guardar </button>
+        <br>
+        <br>
+        <a href="{{ url_for('frutas') }}">Registros</a> 
+        <br>
+        <a href="{{ url_for('buscar') }}">Buscar Fruta</a> 
+
+    </form>
+    
+
+</body>
+
+</html>
