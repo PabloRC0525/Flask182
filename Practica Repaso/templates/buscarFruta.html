@@ -19,12 +19,9 @@
     <center> <h1>Buscar Frutas</h1> </center>
 
     <br>
-    <form action="/buscar" method="POST">
-        <select name="txtFrut" required>
-          <option value="" disabled selected>Buscar fruta</option>
-          {% for fruta in list %}
-            <option value="{{ fruta.0 }}">{{ fruta.0 }}</option>
-          {% endfor %}
+    <form action="{{ url_for('buscar')}}" method="POST">
+        <label>Fruta</label>
+        <input type="text" name="txtFrut" required>
         </select>
         <button type="submit">Buscar</button>
       </form>
@@ -40,8 +37,8 @@
           </tr>
         </thead>
         <tbody>
-            {% if list %}
-              {% for alb in list %}
+            {% if frutas %}
+              {% for alb in frutas %}
                 <tr>
                   <td>{{ alb.0 }}</td>
                   <td>{{ alb.1 }}</td>

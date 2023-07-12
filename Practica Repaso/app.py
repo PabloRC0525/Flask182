@@ -90,26 +90,29 @@ def eliminaralb(id):
     return redirect(url_for('index'))
 
 
-    
-@app.route('/buscar', methods=['GET', 'POST'])
+@app.route('/consultar')
+def consultar():
+    return render_template('buscarFruta.html')
+
+@app.route('/buscar', methods=['POST'])
 def buscar():
     if request.method == 'POST':
         Vfruta = request.form['txtFrut']
         
         curselect = mysql.connection.cursor()
-        curselect.execute('SELECT * FROM tbFrutas WHERE fruta = %s', (Vfruta,))
-        consulta = curselect.fetchone()
+        if not Vfruta:  # Si no se ingresa ningún nombre de fruta
+            curselect.execute('SELECT * FROM tbFrutas')
+        else:
+            curselect.execute('SELECT * FROM tbFrutas WHERE fruta = %s', (Vfruta,))
+        consulta = curselect.fetchall()
     
         if consulta is not None:
-            return render_template('buscarFruta.html', listAlbums=consulta)
+            return render_template('buscarFruta.html', frutas=consulta)
         else:
             mensaje = 'No se encontraron resultados para la fruta ingresada.'
             return render_template('buscarFruta.html', mensaje=mensaje)
     
-    CS = mysql.connection.cursor()
-    CS.execute('SELECT fruta FROM tbFrutas')
-    frutas = CS.fetchall()
-    return render_template('buscarFruta.html', list=frutas)
+    
 
 #Ejecucion de servidor
 if __name__ =='__main__':
