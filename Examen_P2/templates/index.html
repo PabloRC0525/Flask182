@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang ='es'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floreria</title>
+
+
+</head>
+<body>
+    {%with mensajes= get_flashed_messages()%}
+        {% if mensajes%}
+            {%for msj in mensajes%}
+                <h3> {{ msj }} </h3>
+            {%endfor%}
+        {% endif %}
+    {%endwith%}
+    <center> <h1>Floreria</h1> </center>
+    <br>
+    <br>
+    <form action="/guardar" method="POST">
+
+        <input type="text" name="txtFlor" placeholder="Ingrese el nombre de la flor">
+        <input type="number" name="txtCant" placeholder="Cantidad">
+        <input type="number" name="txtPrecio" placeholder="Precio" step="0.01" >
+        
+        <button type="submit"> Guardar </button>
+        <br>
+        <br>
+        <a href="{{ 'buscar' }}" >Consultar Flores</a>
+
+    </form>
+    
+
+</body>
+
+</html>
