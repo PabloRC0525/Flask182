@@ -30,12 +30,17 @@
     </form>
     
     <br>
+<<<<<<< HEAD
     <br>
     <h1>Albums guardados</h1>
+=======
+    <h1>Albumes gurardados</h1>
+>>>>>>> bdef582b99df0870b13c58f952af519aa754554f
     <br>
     <table>
         <thead>
             <tr>
+<<<<<<< HEAD
                 <td>Id:</td>
                 <td>Nombre:</td>
                 <td>Artista:</td>
@@ -44,12 +49,24 @@
         </thead>
         <tbody>
             {% for alb in listAlbums %}
+=======
+                <td> ID: </td>
+                <td> Nombre: </td>
+                <td> Artista: </td>
+                <td> Año de publicación: </td>
+            </tr>
+
+        </thead>
+        <tbody>
+            {%for alb in listAlbums %}
+>>>>>>> bdef582b99df0870b13c58f952af519aa754554f
             <tr>
                 <td>{{ alb.0 }}</td>
                 <td>{{ alb.1 }}</td>
                 <td>{{ alb.2 }}</td>
                 <td>{{ alb.3 }}</td>
                 <td>
+<<<<<<< HEAD
                     <a href="#">Editar</a>
                     <a href="#">Eliminar</a>
                 </td>
@@ -57,5 +74,15 @@
             {% endfor %}
         </tbody>
     </table>
+=======
+                    <a href = "/editar/{{ alb.0 }}">Editar</a>
+                    <a href = "/eliminar/{{ alb.0 }}">Eliminar</a>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+>>>>>>> bdef582b99df0870b13c58f952af519aa754554f
 </body>
 </html>

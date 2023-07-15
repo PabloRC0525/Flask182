@@ -82,65 +82,54 @@ def admin():
 @app.route('/regpaciente', methods=['GET', 'POST'])
 def regpaciente():
     if request.method == 'POST':
-        VMed = request.form['txtMed']  # Actualiza el nombre del atributo a txtMed
-        # Obtén el ID del médico a partir de su nombre
+        VMed = request.form['txtMd']  # Actualiza el nombre del atributo a txtMd
+        VNom = request.form['txtNom']
+        VAP = request.form['txtAP']
+        VAM = request.form['txtAM']
+        VNac = request.form['txtNac']
+        VEnf = request.form['txtEnf']
+        VAlr = request.form['txtAlg']
+        VAnt = request.form['txtAnt']
         CS = mysql.connection.cursor()
-        CS.execute('SELECT ID FROM admin WHERE CONCAT(Nombre, " ", Apellidopa, IF(Apellidoma != "", CONCAT(" ", Apellidoma), "")) = %s', (VMed,))
-        medico = CS.fetchone()
-        if medico:
-            VMedID = medico[0]  # Accede al primer elemento de la tupla, que es el ID
-            VNom = request.form['txtNom']
-            VAP = request.form['txtAP']
-            VAM = request.form['txtAM']
-            VNac = request.form['txtNac']
-            VEnf = request.form['txtEnf']
-            VAlr = request.form['txtAlg']
-            VAnt = request.form['txtAnt']
-
-            CS.execute(
-                'INSERT INTO registro_paciente (Medico_id, Nombre, Apellidopa, Apellidoma, Fecha_Nacimiento, Enfermedades, Alergias, Antecedentes_familiares) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-                (VMedID, VNom, VAP, VAM, VNac, VEnf, VAlr, VAnt))
-            mysql.connection.commit()
-            flash('Paciente registrado correctamente')
-            return redirect(url_for('regpaciente'))
-
-        flash('El médico ingresado no existe')
+        CS.execute(
+            'INSERT INTO registro_paciente (Medico_id, Nombre, Apellidopa, Apellidoma, Fecha_Nacimiento, Enfermedades, Alergias, Antecedentes_familiares) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+            (VMed, VNom, VAP, VAM, VNac, VEnf, VAlr, VAnt))
+        mysql.connection.commit()
+        flash('Paciente registrado correctamente')
         return redirect(url_for('regpaciente'))
 
-    return render_template('RegPaciente.html')
-
+    CS = mysql.connection.cursor()
+    CS.execute('SELECT ID, concat(Nombre, " ", Apellidopa, " ",Apellidoma) as Nombrec FROM admin')
+    medicos = CS.fetchall()
+    return render_template('RegPaciente.html', medicos=medicos)
 
 
 
 @app.route('/ced', methods=['GET','POST'])
 def ced():
     if request.method == 'POST':
-        VPac = request.form['txtPac']  # Actualiza el nombre del atributo a txtMed
-        # Obtén el ID del médico a partir de su nombre
-        CS = mysql.connection.cursor()
-        CS.execute('SELECT Id_paciente FROM registro_paciente WHERE CONCAT(Nombre, " ", Apellidopa, IF(Apellidoma != "", CONCAT(" ", Apellidoma), "")) = %s', (VPac,))
-        paciente = CS.fetchone()
-        paciente = CS.fetchone()
-        if paciente:
-            VPacID = paciente[0]
-            VNom = request.form['txtDat']
-            VPes = request.form['txtPes']
-            VAP = request.form['txtAlt']
-            VAM = request.form['txtTem']
-            VNac = request.form['txtLPM']
-            VEnf = request.form['txtOX']
-            VED = request.form['txtED']
-            VAlr = request.form['txtSint']
-            VAnt = request.form['txtDig']
-            VTrat = request.form['txtTrat']
+
+        VPacID = request.form['txtID']
+        VNom = request.form['txtDat']
+        VPes = request.form['txtPes']
+        VAP = request.form['txtAlt']
+        VAM = request.form['txtTem']
+        VNac = request.form['txtLPM']
+        VEnf = request.form['txtOX']
+        VED = request.form['txtED']
+        VAlr = request.form['txtSint']
+        VAnt = request.form['txtDig']
+        VTrat = request.form['txtTrat']
             
-            CS = mysql.connection.cursor()
-            CS.execute('INSERT INTO exploracion_diagnostico (Id_paciente, Fecha, Peso, Altura, Temperatura, Latidos, Oxigeno, Edad, Sintomas, DX, Tratamiento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (VPacID, VNom, VPes, VAP, VAM, VNac, VEnf, VED, VAlr, VAnt, VTrat))
-            mysql.connection.commit()
+        CS = mysql.connection.cursor()
+        CS.execute('INSERT INTO exploracion_diagnostico (Id_paciente, Fecha, Peso, Altura, Temperatura, Latidos, Oxigeno, Edad, Sintomas, DX, Tratamiento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (VPacID, VNom, VPes, VAP, VAM, VNac, VEnf, VED, VAlr, VAnt, VTrat))
+        mysql.connection.commit()
         flash('Se ha registrado la consulta')
         return redirect(url_for('ced'))
-    
-    return render_template('Citas_Exp_Diagn.html')
+    CS = mysql.connection.cursor()
+    CS.execute('SELECT Id_paciente, concat(Nombre, " ", Apellidopa, " ",Apellidoma) as Nombrec FROM registro_paciente')
+    pacientes = CS.fetchall()
+    return render_template('Citas_Exp_Diagn.html', pacientes=pacientes)
 
 @app.route('/citas')
 def citas():

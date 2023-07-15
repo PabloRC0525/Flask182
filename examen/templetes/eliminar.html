@@ -1,0 +1,20 @@
+<!-- editar  -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Datos</title>
+</head>
+<body>
+    <h1>Lista de Datos</h1>
+    <ul>
+        {% for dato in datos %}
+        <li>{{ dato.dato0 }},{{ dato.dato1 }}, {{ dato.dato2 }}, {{ dato.dato3 }} 
+            <a href="/editar/{{ loop.index0 }}">Editar</a>
+            <form action="/eliminar/{{ loop.index0 }}" method="POST" style="display:inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!-- lista de datos -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Datos</title>
+</head>
+<body>
+    <h1>Lista de Datos</h1>
+    <ul>
+        {% for dato in datos %}
+        <li>{{ dato.dato0 }},{{ dato.dato1 }}, {{ dato.dato2 }}, {{ dato.dato3 }} 
+            <a href="/editar/{{ loop.index0 }}">Editar</a>
+            <a href="/eliminar/{{ loop.index0 }}">Eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
