@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width device-width, initial-scale=1.">
+    <title>Actualizar Fruta</title>
+    <head>
+    <center>
+    <body>
+    <br>
+    <h1> Actualizar Fruta </h1>
+    <br>
+    <br>
+    <form action="/actualizar/{{ consulId.0 }}" method="POST">
+
+        <input type="text" name="txtFruta" value="{{ consulId.1 }}">
+        <input type="text" name="txtTemporada" value="{{ consulId.2 }}">
+        <input type="number" name="txtPrecio" value="{{ consulId.3 }}" step="0.01">
+        <input type="number" name="txtStock" value="{{ consulId.4 }}">
+
+        
+        <button type="submit"> Actualizar </button>
+
+    </form>
+    </center>
+    </body>
+</html>
