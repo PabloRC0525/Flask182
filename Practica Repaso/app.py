@@ -94,23 +94,35 @@ def eliminaralb(id):
 def consultar():
     return render_template('buscarFruta.html')
 
-@app.route('/buscar', methods=['POST'])
+@app.route('/buscar', methods=['POST', 'GET'])
 def buscar():
     if request.method == 'POST':
-        Vfruta = request.form['txtFrut']
-        
-        curselect = mysql.connection.cursor()
-        if not Vfruta:  # Si no se ingresa ningún nombre de fruta
-            curselect.execute('SELECT * FROM tbFrutas')
+        VBusc = request.form['txtFrut']
+
+        cursorBU = mysql.connection.cursor()
+        if not VBusc:
+            cursorBU.execute('SELECT * FROM tbFrutas')
         else:
-            curselect.execute('SELECT * FROM tbFrutas WHERE fruta = %s', (Vfruta,))
-        consulta = curselect.fetchall()
+            cursorBU.execute('SELECT * FROM tbFrutas WHERE fruta = %s', (VBusc,))
+        consBP = cursorBU.fetchall()
+
+        if consBP is not None:
+            return render_template('buscarFruta.html', Frutas=consBP)
+        else:
+            mensaje = 'No se encontraron resultados.'
+            return render_template('buscarFruta.html', mensaje=mensaje, Frutas=consBP)
+
+    cursorBU = mysql.connection.cursor()
+    cursorBU.execute('SELECT * FROM tbFrutas')
+    consBU = cursorBU.fetchall()
     
-        if consulta is not None:
-            return render_template('buscarFruta.html', frutas=consulta)
-        else:
-            mensaje = 'No se encontraron resultados para la fruta ingresada.'
-            return render_template('buscarFruta.html', mensaje=mensaje)
+    return render_template('buscarFruta.html', Frutas=consBU)
+
+    
+    
+
+
+
     
     
 
