@@ -1,14 +1,8 @@
-<!DOCTYPE html>
+{% extends 'plantilla.html'%}
+{% block body %}
+        
+    
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Albums</title>
-
-
-</head>
-<body>
     {%with mensajes= get_flashed_messages()%}
         {% if mensajes%}
             {%for msj in mensajes%}
@@ -16,9 +10,9 @@
             {%endfor%}
         {% endif %}
     {%endwith%}
-    <center> <h1>Gestion de Albums</h1> </center>
-    <br>
-    <br>
+    <h1>Gestion de Albums</h1> 
+    <div class="row">
+        <div class="col-md-5">
     <form action="/guardar" method="POST">
 
         <input type="text" name="txtTitulo" placeholder="Escribe titulo">
@@ -28,10 +22,12 @@
         <button type="submit"> Guardar </button>
 
     </form>
+        </div>
+        <div class="col-md-7">
     
-    <br>
+
     <h1>Albumes gurardados</h1>
-    <br>
+
     <table>
         <thead>
             <tr>
@@ -57,7 +53,7 @@
             {%endfor%}
         </tbody>
     </table>
-
-</body>
-
-</html>
+</div>
+</div>
+    {% endblock %}
+        
