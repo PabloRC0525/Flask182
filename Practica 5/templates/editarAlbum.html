@@ -1,17 +1,31 @@
 {% extends 'plantilla.html'%}
 {% block body %}
-    <br>
-    <h1> Actualizar Album </h1>
-    <br>
-    <br>
-    <form action="/actualizar/{{ consulId.0 }}" method="POST">
+<h3 class="display-1 text-center mt-5 mb-5 text-primary">Actualizar Album</h3>
 
-        <input type="text" name="txtTitulo" value="{{ consulId.1 }}">
-        <input type="text" name="txtArtista" value="{{ consulId.2 }}">
-        <input type="number" name="txtAnio" value="{{ consulId.3 }}">
-        
-        <button type="submit"> Actualizar </button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <form action="/actualizar/{{ consulId.0 }}" method ="POST">
 
-    </form>
-    </center>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="txtTitulo" value="{{ consulId.1 }}"> 
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="txtArtista" value="{{ consulId.2 }}">
+                </div>  
+
+                <div class="mb-3">
+                    <input type="number" class="form-control" name="txtAnio" value="{{ consulId.3 }}">
+                </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-outline-primary"> Actualizar </button>
+            </div>
+
+            </form>
+        </div> <!-- md-5-->
+    </div> <!-- row -->
+</div>
+  
     {% endblock %}

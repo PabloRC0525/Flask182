@@ -1,21 +1,38 @@
-{% extends 'plantilla.html'%}
-{% block body %}
-    <br>
-    <h1> Eliminar Album </h1>
-    <h3> ¿Está seguro de Eliminar el Siguiente Album? </h3>
-    <br>
-    <br>
-    <form action="/eliminaralb/{{ consulId.0 }}" method="POST">
+{%extends 'plantilla.html'%}  
+{%block body%}
+    
+    {%with mensajes = get_flashed_messages() %}
+        {% if mensajes%}
+        {%for msj in mensajes%}
+            <h3> {{ msj }} </h3>
+        {%endfor%}
+        {% endif %}
+    {%endwith%}
 
-        <input type="text" name="txtTitulo" value="{{ consulId.1 }}"readonly>
-        <input type="text" name="txtArtista" value="{{ consulId.2 }}"readonly>
-        <input type="number" name="txtAnio" value="{{ consulId.3 }}"readonly>
-        <br>
-        <br>
-        <button type="submit"> Eliminar </button>
-        <a href="{{ url_for('index') }}" class="cancel-btn">Cancelar</a>
+    <h3 class="display-1 text-center mt-5 mb-5 text-danger"> Eliminar Album</h3>
 
-    </form>
-    </center>
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <form action="/eliminaralb/{{ consulId.0 }}" method ="POST">
+                    <div class="mb-3">
+                        <input type="text" class="form-control"  name="txtTitulo" value="{{ consulId.1 }}">
+                    </div>
 
-    {% endblock %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control"  name="txtArtista" value="{{ consulId.2 }}">
+                    </div>
+
+                    <div class="mb-3">
+                    <input type="number" class="form-control"  name="txtAnio" value="{{ consulId.3 }}">
+                    </div>
+                    
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-danger"> Eliminar </button>
+                </div>                
+    
+            </form>
+            </div>    
+        </div>
+</div>
+{%endblock%}
