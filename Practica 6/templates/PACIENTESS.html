@@ -9,77 +9,33 @@
 <body>
   <div class="container">
     <h2>Consultar Pacientes:</h2>
-    <input type="text" placeholder="Buscar por nombre" required>
     <form action="{{ url_for('cons_pac') }}" method="POST">
+      <input type="text" name="txtBuscarNombre" placeholder="Buscar por nombre" required>
       <div class="info-box">
         <table>
-            <tr></tr>
-              <th>Nombre</th>
-              <th>Modificar</th>
-              <th>Exploracion</th>
-            </tr>
+          <tr>
+            <th>Nombre</th>
+            <th>Modificar</th>
+            <th>Exploración</th>
+          </tr>
+          {% for paciente in pacientes %}
             <tr>
-              <td>Pablo Enrique Ramírez Carrillo</td>
+              <td>{{ paciente }}</td>
               <td>
                 <label class="selectable">
-                  <input type="checkbox">
+                  <input type="checkbox" name="chkModificar{{ loop.index }}">
                   <span class="checkmark"></span>
                 </label>
               </td>
               <td>
                 <label class="selectable">
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Alan Yoltic Guzman Ayala</td>
-              <td>
-                <label class="selectable">
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-              </td>
-              <td>
-                <label class="selectable">
-                  <input type="checkbox">
+                  <input type="checkbox" name="chkExploracion{{ loop.index }}">
                   <span class="checkmark"></span>
                 </label>
               </td>
             </tr>
-            <tr>
-              <td>Andres Morales Cortez </td>
-              <td>
-                <label class="selectable">
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-              </td>
-              <td>
-                <label class="selectable">
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-                <td>Checo Perez </td>
-                <td>
-                  <label class="selectable">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                  </label>
-                </td>
-                <td>
-                  <label class="selectable">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                  </label>
-                </td>
-              </tr>
-            
-          </table>
+          {% endfor %}
+        </table>
       </div>
       <input type="submit" value="Acceder">
     </form>

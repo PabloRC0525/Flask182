@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administracion</title>
+  <title>Administración</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
 </head>
 <body>
-  {%with mensajes= get_flashed_messages()%}
-        {% if mensajes%}
-            {%for msj in mensajes%}
-                <h3> {{ msj }} </h3>
-            {%endfor%}
-        {% endif %}
-    {%endwith%}
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+      {% for msj in mensajes %}
+        <h3>{{ msj }}</h3>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
   <div class="container">
     <h2>Registrar pacientes</h2>
     <form action="/regpaciente" method="POST">
@@ -32,7 +32,7 @@
       <input type="checkbox" id="optionalCheckbox">
       <label for="optionalCheckbox">Datos opcionales</label>
       <div class="optional-data">
-        <input type="text" name="txtEnf" placeholder="Enfermedades cronicas">
+        <input type="text" name="txtEnf" placeholder="Enfermedades crónicas">
         <input type="text" name="txtAlg" placeholder="Alergias">
         <input type="text" name="txtAnt" placeholder="Antecedentes familiares">
       </div>

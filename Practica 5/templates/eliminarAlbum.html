@@ -1,28 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width device-width, initial-scale=1.">
-    <title>Eliminar Album</title>
-    <head>
+{%extends 'platilla.html'%}
+
+{%block body%}
+    
     <center>
-    <body>
-    <br>
-    <h1> Eliminar Album </h1>
-    <h3> ¿Está seguro de Eliminar el Siguiente Album? </h3>
-    <br>
-    <br>
-    <form action="/eliminaralb/{{ consulId.0 }}" method="POST">
-
-        <input type="text" name="txtTitulo" value="{{ consulId.1 }}"readonly>
-        <input type="text" name="txtArtista" value="{{ consulId.2 }}"readonly>
-        <input type="number" name="txtAnio" value="{{ consulId.3 }}"readonly>
+        <br>
+        <h1>Eliminar Album</h1>
+        <h3>Seguro que quieres eliminar este album?</h3>
         <br>
         <br>
-        <button type="submit"> Eliminar </button>
-        <a href="{{ url_for('index') }}" class="cancel-btn">Cancelar</a>
-
-    </form>
+        <form action="" method="POST">
+            <input type="text" name="txtTitulo", value="{{album.1}}",readonly>
+            <input type="text" name="txtArtista", value="{{album.2}}", readonly>
+            <input type="number" name="txtAnio", value="{{album.3}}", readonly>
+    
+            <button type="submit">Eliminar</button>
+            <a href="{{url_for('index')}}"><button type="button">Cancelar</button></a>
+    
+        </form>
     </center>
-    </body>
-</html>
+
+{%endblock%}

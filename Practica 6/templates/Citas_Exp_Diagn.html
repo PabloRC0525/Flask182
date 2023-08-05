@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
 </head>
 <body>
-  {%with mensajes= get_flashed_messages()%}
-        {% if mensajes%}
-            {%for msj in mensajes%}
-                <h3> {{ msj }} </h3>
-            {%endfor%}
-        {% endif %}
-    {%endwith%}
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+      {% for msj in mensajes %}
+        <h3>{{ msj }}</h3>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
   <div class="container">
-    <h2>Citas, Exploracion y Dagnostico</h2>
+    <h2>Citas, Exploracion y Diagnostico</h2>
     <form action="/ced" method="POST">
       <select name="txtID" id="txtPac" required>
         <option value="" disabled selected>Paciente</option>

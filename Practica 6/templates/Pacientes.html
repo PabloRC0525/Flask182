@@ -10,12 +10,12 @@
   <div class="container">
     <h2>Pacientes</h2>
     <form action="{{ url_for('cons_pac') }}" method="POST">
-      <input type="text" placeholder="ID del paciente" required>
+      <input type="text" name="txtID" placeholder="ID del paciente" required>
       <label for="Fecha de nacimiento">Fecha de nacimiento</label>
-      <input type="date" placeholder="Fecha de nacimiento (dd/mm/yyyy)" required>
-      <input type="text" placeholder="Enfermedades cronicas">
-      <input type="text" placeholder="Alergias">
-      <input type="text" placeholder="Antecedentes familiares">
+      <input type="date" name="txtFechaNacimiento" placeholder="Fecha de nacimiento (dd/mm/yyyy)" required>
+      <input type="text" name="txtEnfermedades" placeholder="Enfermedades crónicas">
+      <input type="text" name="txtAlergias" placeholder="Alergias">
+      <input type="text" name="txtAntecedentesFamiliares" placeholder="Antecedentes familiares">
       <input type="submit" value="Guardar">
     </form>
   </div>

@@ -10,13 +10,12 @@
     <div class="container">
         <h2>Menú Principal</h2>
 
-        
         <form action="{{ url_for('regpaciente') }}" method="GET">
             <button type="submit">Registrar Paciente</button>
         </form>
     
         <form action="{{ url_for('ced') }}" method="GET">
-            <button type="submit">Exploracion y Diagnostico</button>
+            <button type="submit">Exploración y Diagnóstico</button>
         </form>
         
         <form action="{{ url_for('citas') }}" method="GET">
@@ -26,6 +25,6 @@
         <form action="{{ url_for('cons_pac') }}" method="GET">
             <button type="submit">Consultar Pacientes</button>
         </form>
-    
+    </div>
 </body>
 </html>

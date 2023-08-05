@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
 </head>
 <body>
-  {%with mensajes= get_flashed_messages()%}
-        {% if mensajes%}
-            {%for msj in mensajes%}
-                <h3> {{ msj }} </h3>
-            {%endfor%}
-        {% endif %}
-    {%endwith%}
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+      {% for msj in mensajes %}
+        <h3>{{ msj }}</h3>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
   <div class="container">
     <h2>Administracion de Medicos</h2>
     <form action="{{ url_for('admin') }}" method="POST">
@@ -24,12 +24,12 @@
       <input type="text" name="txtCed" placeholder="Cedula" required>
       <input type="text" name="txtCorr" placeholder="Correo" required>
       <select name="txtRol" required>
-        <option value=""  disabled selected>Seleccionar Rol</option>
+        <option value="" disabled selected>Seleccionar Rol</option>
         <option value="Administrador">Administrador</option>
         <option value="Medico">Medico</option>
       </select>
-      <input type="text" name="txtPass"placeholder="Contrasena" required>
-      <button type="submit"> Ingresar </button>
+      <input type="password" name="txtPass" placeholder="Contraseña" required>
+      <button type="submit">Ingresar</button>
     </form>
   </div>
 </body>

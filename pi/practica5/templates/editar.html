@@ -1,0 +1,31 @@
+{%extends 'platilla.html'%}
+
+{%block body%}
+    
+    <center>
+    <h1 class="display-1 text-center mt-5 mb-5 text-danger">Actualizar Album</h1>
+    <div class="col-md-7">
+    <div>
+        <form action="/actualizar/{{album.0}}" method="POST">
+
+        <div class="card card-body">
+            <input type="text" class="form-control" name="txtTitulo", value="{{album.1}}">
+        </div>
+
+        <div class="card card-body">
+            <input type="text" class="form-control" name="txtArtista", value="{{album.2}}">
+        </div>
+
+        <div class="card card-body">
+            <input type="number" class="form-control" name="txtAnio", value="{{album.3}}">
+        </div>
+        
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-success"> Actualizar </button>
+          </div>
+        
+    </form>
+    </center>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,30 @@
+{%extends 'platilla.html'%}
+
+{%block body%}
+    <div class="col-md-7">
+        <h1 class="display-1 text-center mt-5 mb-5 text-danger">Eliminar Album</h1>
+        <h5 class="display-1 text-center mt-5 mb-5 text-danger">Seguro que quieres eliminar este album?</h5>
+        <div>
+        <form action="/eliminar/{{album.0}}" method="POST">
+            <div>
+                 <input type="text" class="form-control" name="txtTitulo", value="{{album.1}}",readonly>
+            </div>
+           
+            <div>
+                <input type="text" class="form-control" name="txtArtista", value="{{album.2}}", readonly>
+            </div>
+            
+            <div>
+                <input type="number" class="form-control" name="txtAnio", value="{{album.3}}", readonly>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-outline-success">Eliminar</button>
+                <a href="{{url_for('index')}}"><button type="button" class="btn btn-outline-success">Cancelar</button></a>
+              </div>
+            
+    
+        </form>
+        </div>
+        </div>
+{%endblock%}

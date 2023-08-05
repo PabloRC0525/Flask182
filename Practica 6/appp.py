@@ -1,55 +1,42 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
-#inicialización del servidor Flask
+
 app = Flask(__name__)
 
-#Configuracion de la conexion
-app.config['MYSQL_HOST']="localhost"
-app.config['MYSQL_USER']="root"
-app.config['MYSQL_PASSWORD']=""
-app.config['MYSQL_DB']="COnsultorio"
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = ""
+app.config['MYSQL_DB'] = "COnsultorio"
 
-app.secret_key='mysecretkey'
-mysql= MySQL(app)
+app.secret_key = 'mysecretkey'
+mysql = MySQL(app)
 
-#Declaramos una ruta
-#ruta Index http://localhost:5000
-#ruta se compone de nombre y funcion
 @app.route('/')
 def index():
-     return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
 def login():
     VRFC = request.form['txtRFC']
     VPass = request.form['txtPass']
     
-    # Conectamos a la base de datos
     CS = mysql.connection.cursor()
-    
-    # Verificar las credenciales en la base de datos
     consulta = "SELECT RFC FROM admin WHERE RFC = %s AND contraseña = %s"
     CS.execute(consulta, (VRFC, VPass))
     resultado = CS.fetchone()
     Rol = "select Rol from admin where RFC = %s AND contraseña = %s"
     
-    # Verificar si las credenciales son válidas
     if resultado is not None:
-        # Las credenciales son válidas, redirigir al menú principal
         CS.execute(Rol, (VRFC, VPass))
         rol_resultado = CS.fetchone()
 
         if rol_resultado is not None and rol_resultado[0] == "Administrador":
-            # El usuario es administrador, redirigir al menú de administrador
             return render_template('Menuadmin.html')
         else:
-            # El usuario no es administrador, redirigir al menú principal
             return render_template('Menu.html')
     else:
-        # Las credenciales son inválidas, redirigir a la página de inicio de sesión con un mensaje de error
         flash('RFC o contraseña incorrectos. Intente nuevamente.')
         return redirect(url_for('index'))
-
 
 @app.route('/menu', methods=['GET'])
 def menu():
@@ -82,7 +69,7 @@ def admin():
 @app.route('/regpaciente', methods=['GET', 'POST'])
 def regpaciente():
     if request.method == 'POST':
-        VMed = request.form['txtMd']  # Actualiza el nombre del atributo a txtMd
+        VMed = request.form['txtMd']
         VNom = request.form['txtNom']
         VAP = request.form['txtAP']
         VAM = request.form['txtAM']
@@ -103,12 +90,9 @@ def regpaciente():
     medicos = CS.fetchall()
     return render_template('RegPaciente.html', medicos=medicos)
 
-
-
-@app.route('/ced', methods=['GET','POST'])
+@app.route('/ced', methods=['GET', 'POST'])
 def ced():
     if request.method == 'POST':
-
         VPacID = request.form['txtID']
         VNom = request.form['txtDat']
         VPes = request.form['txtPes']
@@ -120,7 +104,7 @@ def ced():
         VAlr = request.form['txtSint']
         VAnt = request.form['txtDig']
         VTrat = request.form['txtTrat']
-            
+
         CS = mysql.connection.cursor()
         CS.execute('INSERT INTO exploracion_diagnostico (Id_paciente, Fecha, Peso, Altura, Temperatura, Latidos, Oxigeno, Edad, Sintomas, DX, Tratamiento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (VPacID, VNom, VPes, VAP, VAM, VNac, VEnf, VED, VAlr, VAnt, VTrat))
         mysql.connection.commit()
@@ -139,10 +123,16 @@ def citas():
 def cons_med():
     return render_template('MEDICOS.html')
 
-@app.route('/cons_pac')
+@app.route('/cons_pac', methods=['GET', 'POST'])
 def cons_pac():
-    return render_template('PACIENTESS.html')
+    if request.method == 'POST':
+        # Aquí puedes agregar la lógica para consultar pacientes según los checkboxes seleccionados
+        pass
+        
+    CS = mysql.connection.cursor()
+    CS.execute('SELECT ID, concat(Nombre, " ", Apellidopa, " ",Apellidoma) as Nombrec FROM admin')
+    medicos = CS.fetchall()
+    return render_template('PACIENTESS.html', medicos=medicos)
 
-#Ejecucion de servidor
-if __name__ =='__main__':
-    app.run(port=5000,debug=True)
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
