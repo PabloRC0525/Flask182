@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 
 app = Flask(__name__)
 
@@ -10,6 +11,25 @@ app.config['MYSQL_DB'] = "COnsultorio"
 
 app.secret_key = 'mysecretkey'
 mysql = MySQL(app)
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'index'  
+
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    CS = mysql.connection.cursor()
+    CS.execute("SELECT RFC FROM admin WHERE RFC = %s", (user_id,))
+    result = CS.fetchone()
+    if result is not None:
+        return User(result[0])
+    return None
+
 
 @app.route('/')
 def index():
@@ -133,6 +153,12 @@ def cons_pac():
     CS.execute('SELECT ID, concat(Nombre, " ", Apellidopa, " ",Apellidoma) as Nombrec FROM admin')
     medicos = CS.fetchall()
     return render_template('PACIENTESS.html', medicos=medicos)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()  # Log out the current user
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
