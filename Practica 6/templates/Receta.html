@@ -6,72 +6,64 @@
     <title>Receta Médica</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
     <style>
+        /* Estilos específicos para esta receta */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 15px;
         }
         th, td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            vertical-align: top;
         }
     </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Receta Médica</h2>
-    <table>
-        <tr>
-            <th colspan="2">Información del Paciente</th>
-        </tr>
-        <tr>
-            <td><strong>Paciente:</strong></td>
-            <td>{{ paciente_name }}</td>
-        </tr>
-        <tr>
-            <td><strong>Fecha:</strong></td>
-            <td>{{ fecha }}</td>
-        </tr>
-        <tr>
-            <td><strong>Peso:</strong></td>
-            <td>{{ peso }}</td>
-        </tr>
-        <tr>
-            <td><strong>Altura:</strong></td>
-            <td>{{ altura }}</td>
-        </tr>
-        <tr>
-            <td><strong>Temperatura:</strong></td>
-            <td>{{ temperatura }}</td>
-        </tr>
-        <tr>
-            <td><strong>LPM:</strong></td>
-            <td>{{ lpm }}</td>
-        </tr>
-        <tr>
-            <td><strong>Oxigeno:</strong></td>
-            <td>{{ oxigeno }}</td>
-        </tr>
-        <tr>
-            <td><strong>Edad:</strong></td>
-            <td>{{ edad }}</td>
-        </tr>
-        <tr>
-            <th colspan="2">Diagnóstico</th>
-        </tr>
-        <tr>
-            <td><strong>Síntomas:</strong></td>
-            <td>{{ sintomas }}</td>
-        </tr>
-        <tr>
-            <td><strong>Diagnóstico:</strong></td>
-            <td>{{ diagnostico }}</td>
-        </tr>
-        <tr>
-            <td><strong>Tratamiento:</strong></td>
-            <td>{{ tratamiento }}</td>
-        </tr>
-    </table>
-  </div>
+    <div class="container">
+        <h2>Receta Médica</h2>
+        <table>
+            <tr>
+                <th colspan="2">Información del Paciente</th>
+            </tr>
+            <tr>
+                <td><strong>Paciente:</strong></td>
+                <td>{{ paciente_name }}</td>
+            </tr>
+            <!-- Agregar el resto de la información del paciente aquí -->
+            <!-- ... -->
+            <tr>
+                <th colspan="2">Diagnóstico</th>
+            </tr>
+            <tr>
+                <td><strong>Síntomas:</strong></td>
+                <td>{{ sintomas }}</td>
+            </tr>
+            <!-- Agregar el diagnóstico y tratamiento aquí -->
+            <!-- ... -->
+        </table>
+    </div>
 </body>
 </html>
