@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receta Médica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Receta Médica</h2>
+    <table>
+        <tr>
+            <th colspan="2">Información del Paciente</th>
+        </tr>
+        <tr>
+            <td><strong>Paciente:</strong></td>
+            <td>{{ paciente_name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Fecha:</strong></td>
+            <td>{{ fecha }}</td>
+        </tr>
+        <tr>
+            <td><strong>Peso:</strong></td>
+            <td>{{ peso }}</td>
+        </tr>
+        <tr>
+            <td><strong>Altura:</strong></td>
+            <td>{{ altura }}</td>
+        </tr>
+        <tr>
+            <td><strong>Temperatura:</strong></td>
+            <td>{{ temperatura }}</td>
+        </tr>
+        <tr>
+            <td><strong>LPM:</strong></td>
+            <td>{{ lpm }}</td>
+        </tr>
+        <tr>
+            <td><strong>Oxigeno:</strong></td>
+            <td>{{ oxigeno }}</td>
+        </tr>
+        <tr>
+            <td><strong>Edad:</strong></td>
+            <td>{{ edad }}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Diagnóstico</th>
+        </tr>
+        <tr>
+            <td><strong>Síntomas:</strong></td>
+            <td>{{ sintomas }}</td>
+        </tr>
+        <tr>
+            <td><strong>Diagnóstico:</strong></td>
+            <td>{{ diagnostico }}</td>
+        </tr>
+        <tr>
+            <td><strong>Tratamiento:</strong></td>
+            <td>{{ tratamiento }}</td>
+        </tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -59,3 +59,34 @@ body {
     font-weight: bold;
   }
   
+  .receta {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 0;
+    color: #333;
+}
+
+.seccion {
+    margin-bottom: 20px;
+}
+
+.seccion h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.seccion p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+strong {
+    font-weight: bold;
+}

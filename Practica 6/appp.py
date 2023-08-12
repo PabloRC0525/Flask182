@@ -107,6 +107,10 @@ def regpaciente():
     medicos = CS.fetchall()
     return render_template('RegPaciente.html', medicos=medicos)
 
+@app.route('/receta')
+def receta():
+    return render_template('Receta.html')
+
 @app.route('/ced', methods=['GET', 'POST'])
 @login_required
 def ced():
@@ -127,11 +131,13 @@ def ced():
         CS.execute('INSERT INTO exploracion_diagnostico (Id_paciente, Fecha, Peso, Altura, Temperatura, Latidos, Oxigeno, Edad, Sintomas, DX, Tratamiento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (VPacID, VNom, VPes, VAP, VAM, VNac, VEnf, VED, VAlr, VAnt, VTrat))
         mysql.connection.commit()
         flash('Se ha registrado la consulta')
-        return redirect(url_for('ced'))
+        return redirect(url_for('receta'))
     CS = mysql.connection.cursor()
     CS.execute('SELECT Id_paciente, concat(Nombre, " ", Apellidopa, " ",Apellidoma) as Nombrec FROM registro_paciente')
     pacientes = CS.fetchall()
     return render_template('Citas_Exp_Diagn.html', pacientes=pacientes)
+
+
 
 @app.route('/citas')
 @login_required
