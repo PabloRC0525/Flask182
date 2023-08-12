@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
-
+from functools import wraps
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = "localhost"
@@ -12,24 +11,16 @@ app.config['MYSQL_DB'] = "COnsultorio"
 app.secret_key = 'mysecretkey'
 mysql = MySQL(app)
 
-login_manager = LoginManager(app)
-login_manager.login_view = 'index'  
-
-
-class User(UserMixin):
-    def __init__(self, id):
-        self.id = id
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    CS = mysql.connection.cursor()
-    CS.execute("SELECT RFC FROM admin WHERE RFC = %s", (user_id,))
-    result = CS.fetchone()
-    if result is not None:
-        return User(result[0])
-    return None
-
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Verificar si el correo electrónico está almacenado en la sesión
+        if 'RFC' not in session:
+            # Redirigir al inicio de sesión si no ha iniciado sesión
+            flash('Debe iniciar sesión para acceder a esta página.')
+            return redirect(url_for('index'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/')
 def index():
@@ -51,22 +42,27 @@ def login():
         rol_resultado = CS.fetchone()
 
         if rol_resultado is not None and rol_resultado[0] == "Administrador":
+            session['RFC'] = consulta[0]
             return render_template('Menuadmin.html')
         else:
+            session['RFC'] = consulta[0]
             return render_template('Menu.html')
     else:
         flash('RFC o contraseña incorrectos. Intente nuevamente.')
         return redirect(url_for('index'))
 
 @app.route('/menu', methods=['GET'])
+@login_required
 def menu():
     return render_template('Menu.html')
 
 @app.route('/menuadmin', methods=['GET'])
+@login_required
 def menuadmin():
     return render_template('Menuadmin.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
+@login_required
 def admin():
     if request.method == 'POST':
         VRFC = request.form['txtRFC']
@@ -87,6 +83,7 @@ def admin():
     return render_template('Admin.html')
 
 @app.route('/regpaciente', methods=['GET', 'POST'])
+@login_required
 def regpaciente():
     if request.method == 'POST':
         VMed = request.form['txtMd']
@@ -111,6 +108,7 @@ def regpaciente():
     return render_template('RegPaciente.html', medicos=medicos)
 
 @app.route('/ced', methods=['GET', 'POST'])
+@login_required
 def ced():
     if request.method == 'POST':
         VPacID = request.form['txtID']
@@ -136,14 +134,17 @@ def ced():
     return render_template('Citas_Exp_Diagn.html', pacientes=pacientes)
 
 @app.route('/citas')
+@login_required
 def citas():
     return render_template('Citas.html')
 
 @app.route('/cons_med')
+@login_required
 def cons_med():
     return render_template('MEDICOS.html')
 
 @app.route('/cons_pac', methods=['GET', 'POST'])
+@login_required
 def cons_pac():
     if request.method == 'POST':
         # Aquí puedes agregar la lógica para consultar pacientes según los checkboxes seleccionados
@@ -154,11 +155,11 @@ def cons_pac():
     medicos = CS.fetchall()
     return render_template('PACIENTESS.html', medicos=medicos)
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()  # Log out the current user
+@app.route('/cerrar')
+def cerrar():
+    # Eliminar el correo electrónico del usuario de la sesión
+    session.pop('RFC', None)
+    # Redirigir al usuario a la página de inicio de sesión
     return redirect(url_for('index'))
-
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
