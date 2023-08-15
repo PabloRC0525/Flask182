@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
 from functools import wraps
-from flask_bcrypt import Bcrypt 
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = "localhost"
@@ -355,5 +354,110 @@ def eliminarp(id):
 
     flash('Se elimino el Paciente')
     return redirect(url_for('cons_pac'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from flask import Response, render_template
+
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Spacer, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from io import BytesIO
+from flask import Response, flash, redirect, url_for
+from flask import session
+from flask import Flask
+
+
+
+
+@app.route('/download_receta/<id>', methods=['GET'])
+@login_required
+def download_receta(id):
+    user_id = session.get('RFC')
+    CS = mysql.connection.cursor()
+    CS.execute('''
+        SELECT ed.Id_exp,
+            CONCAT(rp.Nombre, " ", rp.Apellidopa, " ", rp.Apellidoma),
+            CONCAT(m.Nombre, " ", m.Apellidopa, " ", m.Apellidoma),
+            ed.Fecha, ed.Peso, ed.Altura, ed.Temperatura, ed.Latidos, ed.Oxigeno, ed.Edad, ed.Sintomas, ed.DX, ed.Tratamiento
+        FROM exploracion_diagnostico ed
+        JOIN registro_paciente rp ON ed.Id_paciente = rp.Id_paciente
+        JOIN admin m ON ed.Medico_id = m.RFC
+        WHERE ed.Id_exp=%s AND m.RFC = %s
+    ''', (id, user_id))
+    receta_data = CS.fetchone()
+
+    if receta_data:
+        pdf_buffer = BytesIO()  # Crear un búfer en memoria para el PDF
+
+        pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
+        story = []
+
+        # Encabezado
+        header_style = getSampleStyleSheet()["Heading1"]
+        header = Paragraph("Receta Médica", header_style)
+        story.append(header)
+
+        # Información de la receta
+        normal_style = getSampleStyleSheet()["Normal"]
+        info_data = [
+            ("Consulta", receta_data[0]),
+            ("Doctor", receta_data[2]),
+            ("Fecha", receta_data[3]),
+            ("Paciente", receta_data[1]),
+            ("Peso", receta_data[4]),
+            ("Altura", receta_data[5]),
+            ("Temperatura", receta_data[6]),
+            ("LPM", receta_data[7]),
+            ("Oxigeno", receta_data[8]),
+            ("Edad", receta_data[9]),
+            ("Síntomas", receta_data[10]),
+            ("Dx", receta_data[11]),
+            ("Tratamiento", receta_data[12]),
+        ]
+        for label, value in info_data:
+            info_para = Paragraph(f"<b>{label}:</b> {value}", normal_style)
+            story.append(info_para)
+
+        # Espacio entre secciones
+        story.append(Spacer(1, 20))
+
+      
+
+        # Guardar el PDF
+        pdf.build(story)
+
+        pdf_buffer.seek(0)  # Regresar al inicio del búfer
+        response = Response(pdf_buffer.read(), content_type='application/pdf')
+        response.headers['Content-Disposition'] = f'attachment; filename=receta_{id}.pdf'
+
+        return response
+
+    else:
+        flash('No se encontró la receta solicitada.')
+        return redirect(url_for('cons_cit'))
+
+
+
+
+
+
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5006, debug=True)
