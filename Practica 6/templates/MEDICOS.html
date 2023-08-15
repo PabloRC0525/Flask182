@@ -10,20 +10,39 @@
   <div class="container">
     <h2>Consultar Médicos:</h2>
     <form action="{{ url_for('cons_med') }}" method="POST">
-      <input type="text" name="txtNombre" placeholder="Buscar por nombre" required>
+      <div class="input-box">
+        <input type="text" name ="busc" placeholder="Buscar por nombre" class="input-control">
+    </div>
+     <button type="submit" class="btn">Buscar</button>
       <div class="info-box">
         <table>
+          <thead>
           <tr>
-            <th>Nombre</th>
+            <th>RFC</th>
+              <th>Nombre</th>
+              <th>Cedula</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+            
           </tr>
+        </thead>
           {% for medico in medicos %}
             <tr>
-              <td>{{ medico }}</td>
+              <td>{{ medico.0 }}</td>
+              <td>{{medico.1}}</td>
+              <td>{{medico.2}}</td>
+              <td>{{medico.3}}</td>
+              <td>{{medico.4}}</td>
+              <td> 
+                <a href=/visualizarMen/{{medico.0}}  class="btn" >Actualizar</a>
+                <a href=/confirmacionm/{{medico.0}} class="btnD">Eliminar</button>
+            </td>
             </tr>
           {% endfor %}
         </table>
       </div>
-      <input type="submit" value="Acceder">
+
     </form>
   </div>
 </body>

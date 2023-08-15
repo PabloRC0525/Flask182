@@ -144,10 +144,27 @@ def ced():
 def citas():
     return render_template('Citas.html')
 
-@app.route('/cons_med')
+@app.route('/cons_med', methods=['GET', 'POST'])
 @login_required
 def cons_med():
-    return render_template('MEDICOS.html')
+    if request.method == 'POST':
+        VBusc = request.form['busc']
+        
+        cursorBU = mysql.connection.cursor()
+        if not VBusc:
+            cursorBU.execute('SELECT RFC, concat (Nombre, Apellidopa, ApellidoMa), Cedula, Correo, Rol FROM admin')
+
+        else:
+            cursorBU.execute('SELECT RFC, concat (Nombre, Apellidopa, ApellidoMa), Cedula, Correo, Rol FROM admin  WHERE Nombre = %s', (VBusc,))
+        consBP = cursorBU.fetchall() 
+        if consBP is not None:
+            return render_template('MEDICOS.html', medicos=consBP)
+        else:
+            return render_template('MEDICOS.html')
+    cursorBU = mysql.connection.cursor()
+    cursorBU.execute('SELECT RFC, concat (Nombre, Apellidopa, ApellidoMa), Cedula, Correo, Rol FROM admin')
+    consBU = cursorBU.fetchall()
+    return render_template('MEDICOS.html', medicos=consBU)
 
 @app.route('/cons_pac', methods=['GET', 'POST'])
 @login_required
