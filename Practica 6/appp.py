@@ -373,7 +373,7 @@ from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from flask import Response, render_template
-
+from reportlab.platypus import Table, TableStyle
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Spacer, Paragraph
@@ -409,36 +409,50 @@ def download_receta(id):
         pdf = SimpleDocTemplate(pdf_buffer, pagesize=letter)
         story = []
 
-        # Encabezado
         header_style = getSampleStyleSheet()["Heading1"]
+        header_style.alignment = 1  # Alinear al centro
+        header_style.fontSize = 30  # Tamaño de fuente más grande
         header = Paragraph("Receta Médica", header_style)
         story.append(header)
+        header_style = getSampleStyleSheet()["Heading1"]
+        header_style.alignment = 1  # Alinear al centro
+        header_style.fontSize = 30  # Tamaño de fuente más grande
+        header = Paragraph("", header_style)
+        story.append(header)
+        
 
-        # Información de la receta
-        normal_style = getSampleStyleSheet()["Normal"]
-        info_data = [
-            ("Consulta", receta_data[0]),
-            ("Doctor", receta_data[2]),
-            ("Fecha", receta_data[3]),
-            ("Paciente", receta_data[1]),
-            ("Peso", receta_data[4]),
-            ("Altura", receta_data[5]),
-            ("Temperatura", receta_data[6]),
-            ("LPM", receta_data[7]),
-            ("Oxigeno", receta_data[8]),
-            ("Edad", receta_data[9]),
-            ("Síntomas", receta_data[10]),
-            ("Dx", receta_data[11]),
-            ("Tratamiento", receta_data[12]),
+        # Crear una tabla para los datos de la receta
+        table_data = [
+            ["Consulta", receta_data[0]],
+            ["Doctor", receta_data[2]],
+            ["Fecha", receta_data[3]],
+            ["Paciente", receta_data[1]],
+            ["Peso", receta_data[4]],
+            ["Altura", receta_data[5]],
+            ["Temperatura", receta_data[6]],
+            ["LPM", receta_data[7]],
+            ["Oxigeno", receta_data[8]],
+            ["Edad", receta_data[9]],
+            ["Síntomas", receta_data[10]],
+            ["Dx", receta_data[11]],
+            ["Tratamiento", receta_data[12]],
         ]
-        for label, value in info_data:
-            info_para = Paragraph(f"<b>{label}:</b> {value}", normal_style)
-            story.append(info_para)
+        
+        table_style = TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.darkgrey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('FONTSIZE', (0, 0), (-1, -1), 18),  # Tamaño de fuente 18
+    ])
+    
+        
+        table = Table(table_data, style=table_style, colWidths=[250, 250])  # Adjust colWidths as needed
 
-        # Espacio entre secciones
-        story.append(Spacer(1, 20))
-
-      
+        # Agregar la tabla al contenido del PDF
+        story.append(table)
 
         # Guardar el PDF
         pdf.build(story)
