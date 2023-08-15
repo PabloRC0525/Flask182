@@ -5,15 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   {% with mensajes = get_flashed_messages() %}
     {% if mensajes %}
-      {% for msj in mensajes %}
-        <h3>{{ msj }}</h3>
-      {% endfor %}
+        <!-- Iterar a través de los mensajes flash -->
+        {% for msj in mensajes %}
+            <!-- Agregar un script para mostrar el mensaje con SweetAlert -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{{ msj }}',
+                        showConfirmButton: false,
+                        timer: 2000 // 2 segundos
+                    });
+                });
+            </script>
+        {% endfor %}
     {% endif %}
-  {% endwith %}
+{% endwith %}
   <div class="container">
     <h2>Iniciar sesión</h2>
     <form action="{{ url_for('login') }}" method="POST">

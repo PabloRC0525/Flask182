@@ -5,65 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receta Médica</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
-    <style>
-        /* Estilos específicos para esta receta */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        td {
-            vertical-align: top;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+        <!-- Iterar a través de los mensajes flash -->
+        {% for msj in mensajes %}
+            <!-- Agregar un script para mostrar el mensaje con SweetAlert -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{{ msj }}',
+                        showConfirmButton: false,
+                        timer: 2000 // 2 segundos
+                    });
+                });
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
     <div class="container">
         <h2>Receta Médica</h2>
+        {% for alb in medicos %}
         <table>
+            <tr>
+                <td><strong>Consulta:</strong></td>
+                <td>{{ alb.0 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Doctor:</strong></td>
+                <td>{{ alb.2 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Fecha:</strong></td>
+                <td>{{ alb.3 }}</td>
+            </tr>
             <tr>
                 <th colspan="2">Información del Paciente</th>
             </tr>
             <tr>
                 <td><strong>Paciente:</strong></td>
-                <td>{{ paciente_name }}</td>
+                <td>{{ alb.1 }}</td>
             </tr>
-            <!-- Agregar el resto de la información del paciente aquí -->
-            <!-- ... -->
+            <tr>
+                <td><strong>Peso:</strong></td>
+                <td>{{ alb.4 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Altura:</strong></td>
+                <td>{{ alb.5 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Temperatura:</strong></td>
+                <td>{{ alb.6 }}</td>
+            </tr>
+            <tr>
+                <td><strong>LPM:</strong></td>
+                <td>{{ alb.7 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Oxigeno:</strong></td>
+                <td>{{ alb.8 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Edad:</strong></td>
+                <td>{{ alb.9 }}</td>
+            </tr>
+          
             <tr>
                 <th colspan="2">Diagnóstico</th>
             </tr>
             <tr>
                 <td><strong>Síntomas:</strong></td>
-                <td>{{ sintomas }}</td>
+                <td>{{ alb.10 }}</td>
             </tr>
-            <!-- Agregar el diagnóstico y tratamiento aquí -->
-            <!-- ... -->
+            <tr>
+                <td><strong>Dx:</strong></td>
+                <td>{{ alb.11 }}</td>
+            </tr>
+            <tr>
+                <td><strong>Tratamiento:</strong></td>
+                <td>{{ alb.12 }}</td>
+            </tr>
+            {% endfor %}
+
         </table>
     </div>
+    <center>
+        <br>
+      <a href="/menuadmin" class="btn">Regresar al menú principal</a>
+      </center>
 </body>
 </html>

@@ -5,8 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consultar Medicos</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+        <!-- Iterar a través de los mensajes flash -->
+        {% for msj in mensajes %}
+            <!-- Agregar un script para mostrar el mensaje con SweetAlert -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{{ msj }}',
+                        showConfirmButton: false,
+                        timer: 2000 // 2 segundos
+                    });
+                });
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
   <div class="container">
     <h2>Consultar Médicos:</h2>
     <form action="{{ url_for('cons_med') }}" method="POST">
@@ -35,14 +54,18 @@
               <td>{{medico.3}}</td>
               <td>{{medico.4}}</td>
               <td> 
-                <a href=/visualizarMen/{{medico.0}}  class="btn" >Actualizar</a>
-                <a href=/confirmacionm/{{medico.0}} class="btnD">Eliminar</button>
+                <a href=/visualizarActcm/{{medico.0}}  class="btn" >Actualizar</a>
+              </td><td> 
+                <a href=/confirmacion/{{medico.0}} class="btnD">Eliminar</button>
             </td>
             </tr>
           {% endfor %}
         </table>
       </div>
-
+      <center>
+        <br>
+      <a href="/menuadmin" class="btn">Regresar al menú principal</a>
+      </center>
     </form>
   </div>
 </body>

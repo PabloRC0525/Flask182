@@ -28,37 +28,33 @@
 {% endwith %}
   <div class="container">
     <h2>Registrar pacientes</h2>
-    <form action="/regpaciente" method="POST">
-      <select name="txtMd" id="txtMed" required>
-        <option value="" disabled selected>Medico que lo atiende</option>
-        {% for medico in medicos %}
-          <option value="{{ medico.0 }}">{{ medico.1 }}</option>
-        {% endfor %}
-      </select>
-      <input type="text" name="txtNom" placeholder="Nombre" required>
-      <input type="text" name="txtAP" placeholder="Apellido Paterno" required>
-      <input type="text" name="txtAM" placeholder="Apellido Materno">
+    <form action="/actualizarp/{{UpdUsuario.0}}" method="POST">
+     
+      <input type="text" name="txtNom" placeholder="Nombre" required value="{{UpdUsuario.2}}">
+      <input type="text" name="txtAP" placeholder="Apellido Paterno" required value="{{UpdUsuario.3}}">
+      <input type="text" name="txtAM" placeholder="Apellido Materno" value="{{UpdUsuario.4}}">
+      <br>
       <label for="Fecha de nacimiento">Fecha de nacimiento</label>
-      <input type="date" name="txtNac" placeholder="Fecha de nacimiento (dd/mm/yyyy)" required>
+      <input type="date" name="txtNac" placeholder="Fecha de nacimiento (dd/mm/yyyy)" required value="{{UpdUsuario.5}}">
       <br>
       <input type="checkbox" id="optionalCheckbox">
       <label for="optionalCheckbox">Datos opcionales</label>
       <div class="optional-data">
         <br>
         <label>Enfermedades Cronicas</label>
-        <input type="text" name="txtEnf" placeholder="Enfermedades crónicas" value="-">
+        <input type="text" name="txtEnf" placeholder="Enfermedades crónicas"  value="{{UpdUsuario.6}}">
         <br>
         <label>Alergias</label>
-        <input type="text" name="txtAlg" placeholder="Alergias" value="-">
+        <input type="text" name="txtAlg" placeholder="Alergias" value="{{UpdUsuario.7}}">
         <br>
         <label>Antecedentes familiares</label>
-        <input type="text" name="txtAnt" placeholder="Antecedentes familiares" value="-">
+        <input type="text" name="txtAnt" placeholder="Antecedentes familiares" value="{{UpdUsuario.8}}">
       </div>
       <br>
-      <button type="submit">Registrar</button>
+      <button type="submit">Actualizar</button>
       <center>
         <br>
-      <a href="/menuadmin" class="btn">Regresar al menú principal</a>
+      <a href="/cons_pac" class="btn">Regresar</a>
       </center>
     </form>
   </div>

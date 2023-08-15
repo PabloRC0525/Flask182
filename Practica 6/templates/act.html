@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administracion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Actualizar Medico</h2>
+    <form action="/actualizarm/{{UpdUsuario.1}}" method="POST">
+      <input type="text" name="txtRFC" placeholder="RFC" required value="{{UpdUsuario.1}}"readonly>
+      <input type="text" name="txtNom" placeholder="Nombre" value="{{UpdUsuario.2}}"required>
+      <input type="text" name="txtAP" placeholder="Apellido Paterno" value="{{UpdUsuario.3}}"required>
+      <input type="text" name="txtAM" placeholder="Apellido Materno" value="{{UpdUsuario.4}}">
+      <input type="text" name="txtCed" placeholder="Cedula" value="{{UpdUsuario.5}}"required>
+      <input type="text" name="txtCorr" placeholder="Correo" value="{{UpdUsuario.6}}"required>
+      <select name="txtRol" required>
+        <option value="" disabled selected>Seleccionar Rol</option>
+        <option value="Administrador">Administrador</option>
+        <option value="Medico">Medico</option>
+      </select>
+      <button type="submit">Actualizar</button>
+      <a href="/cons_med" class="btn">Regresar </a>
+    </form>
+  </div>
+</body>
+</html>

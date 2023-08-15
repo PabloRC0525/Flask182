@@ -3,23 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administracion</title>
+  <title>Consultar Medicos</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <div class="container">
-    <h2>Citas</h2>
-    <form action="/citas" method="POST">
-      <select name="txtID" id="txtPac" required>
-        <option value="" disabled selected>ID del paciente</option>
-        {% for paciente in pacientes %}
-          <option value="{{ paciente.0 }}">{{ paciente.1 }}</option>
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+        <!-- Iterar a través de los mensajes flash -->
+        {% for msj in mensajes %}
+            <!-- Agregar un script para mostrar el mensaje con SweetAlert -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{{ msj }}',
+                        showConfirmButton: false,
+                        timer: 2000 // 2 segundos
+                    });
+                });
+            </script>
         {% endfor %}
-      </select>
-      <label for="Fecha de cita">Fecha de cita</label>
-      <input type="date" name="txtFechaCita" placeholder="Fecha de cita (dd/mm/yyyy)" required>
-      <br>
-      <button type="submit">Consultar</button>
+    {% endif %}
+{% endwith %}
+  <div class="container">
+    <h2>Consultar Citas:</h2>
+    <form action="{{ url_for('cons_cit') }}" method="POST">
+      <div class="input-box">
+        <input type="text" name ="busc" placeholder="Buscar por paciente" class="input-control">
+    </div>
+    
+     <button type="submit" class="btn">Buscar</button>
+      <div class="info-box">
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+              <th>Paciente</th>
+              <th>Fecha</th>
+              <th>Consultar</th>
+            
+          </tr>
+        </thead>
+          {% for medico in medicos %}
+            <tr>
+              <td>{{ medico.0 }}</td>
+              <td>{{medico.1}}</td>
+              <td>{{medico.2}}</td>
+              <td> 
+                <a href=/receta/{{medico.0}}  class="btn" >Consultar</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <center>
+        <br>
+      <a href="/menuadmin" class="btn">Regresar al menú principal</a>
+      </center>
     </form>
   </div>
 </body>

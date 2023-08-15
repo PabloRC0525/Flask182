@@ -3,41 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultar Pacientes</title>
+  <title>Consultar Medicos</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+        <!-- Iterar a través de los mensajes flash -->
+        {% for msj in mensajes %}
+            <!-- Agregar un script para mostrar el mensaje con SweetAlert -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{{ msj }}',
+                        showConfirmButton: false,
+                        timer: 2000 // 2 segundos
+                    });
+                });
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
   <div class="container">
     <h2>Consultar Pacientes:</h2>
     <form action="{{ url_for('cons_pac') }}" method="POST">
-      <input type="text" name="txtBuscarNombre" placeholder="Buscar por nombre" required>
+      <div class="input-box">
+        <input type="text" name ="busc" placeholder="Buscar por nombre" class="input-control">
+    </div>
+     <button type="submit" class="btn">Buscar</button>
       <div class="info-box">
         <table>
+          <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Modificar</th>
-            <th>Exploración</th>
+            <th>ID</th>
+              <th>Nombre</th>
+              <th>Nacimiento</th>
+              <th>Enf cronicas</th>
+              <th>Alergias</th>
+              <th>Antecedentes</th>
+              <th>Acciones</th>
+            
           </tr>
-          {% for paciente in pacientes %}
+        </thead>
+          {% for medico in medicos %}
             <tr>
-              <td>{{ paciente }}</td>
-              <td>
-                <label class="selectable">
-                  <input type="checkbox" name="chkModificar{{ loop.index }}">
-                  <span class="checkmark"></span>
-                </label>
-              </td>
-              <td>
-                <label class="selectable">
-                  <input type="checkbox" name="chkExploracion{{ loop.index }}">
-                  <span class="checkmark"></span>
-                </label>
-              </td>
+              <td>{{ medico.0 }}</td>
+              <td>{{medico.1}}</td>
+              <td>{{medico.2}}</td>
+              <td>{{medico.3}}</td>
+              <td>{{medico.4}}</td>
+              <td>{{medico.5}}</td>
+              <td> 
+                <a href=/visualizarActcp/{{medico.0}}  class="btn" >Actualizar</a>
+              </td><td> 
+                <a href=/confirmacionp/{{medico.0}} class="btnD">Eliminar</button>
+            </td>
             </tr>
           {% endfor %}
         </table>
       </div>
-      <input type="submit" value="Acceder">
+      <center>
+        <br>
+      <a href="/menuadmin" class="btn">Regresar al menú principal</a>
+      </center>
     </form>
   </div>
 </body>
